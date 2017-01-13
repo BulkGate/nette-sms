@@ -1,0 +1,18 @@
+Nette\Sms\ServerResponse::__set_state(/* #446e */ array(
+	'status' => -1,
+	'compress' => TRUE,
+	'type' => '',
+	'message' => 'bulk message',
+	'data' => array(
+		'message' => array(
+			array(
+				'phoneNumber' => '420777888999',
+				'text' => 'Hello Nette!',
+				'iso' => 'cz',
+			),
+		),
+		'sender' => array(),
+		'unicode' => TRUE,
+		'flash' => TRUE,
+	),
+))

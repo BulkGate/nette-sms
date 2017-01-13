@@ -1,0 +1,8 @@
+array(
+	'cz' => array('iso' => 'cz', 'gate' => 1, 'sender' => ''),
+	'sk' => array('iso' => 'sk', 'gate' => 2, 'sender' => ''),
+	'gb' => array('iso' => 'gb', 'gate' => 1, 'sender' => ''),
+	'de' => array('iso' => 'de', 'gate' => 3, 'sender' => 'Nette'),
+	'us' => array('iso' => 'us', 'gate' => 1, 'sender' => ''),
+	'ru' => array('iso' => 'ru', 'gate' => 4, 'sender' => '420777444555'),
+)

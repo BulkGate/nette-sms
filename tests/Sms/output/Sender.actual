@@ -1,0 +1,18 @@
+Nette\Sms\ServerResponse::__set_state(/* #e2dc */ array(
+	'status' => -1,
+	'compress' => TRUE,
+	'type' => '',
+	'message' => 'bulk message',
+	'data' => array(
+		'message' => array(
+			array(
+				'phoneNumber' => '420777888999',
+				'text' => 'Hello Nette!',
+				'iso' => 'cz',
+			),
+		),
+		'sender' => array('abc' => '123'),
+		'unicode' => TRUE,
+		'flash' => TRUE,
+	),
+))

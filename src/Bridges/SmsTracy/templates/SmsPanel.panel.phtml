@@ -1,0 +1,95 @@
+<?php
+
+namespace Nette\Bridges\SecurityTracy;
+
+use Tracy\Dumper;
+
+?>
+<style class="tracy-debug">
+
+	#tracy-debug .nette-SmsPanel .tracy-inner {
+		min-width: 700px;
+		width: auto;
+		overflow-x: hidden;
+	}
+
+	#tracy-debug .nette-SmsPanel table {
+		width: 100%;
+		white-space: nowrap;
+	}
+
+	#tracy-debug .nette-SmsPanel .created {
+		font-weight: bold;
+	}
+
+	#tracy-debug .nette-SmsPanel .yes {
+		color: green;
+		font-weight: bold;
+	}
+
+	#tracy-debug .tracy-panel .sms tr:nth-child(2n) td {
+		background: #ffffff;
+	}
+	#tracy-debug .tracy-panel .sms tr td {
+		background: #fefefe;
+	}
+</style>
+<div class="nette-SmsPanel">
+	<h1>SMS was sent: <?= $count ?><?php /*if ($user->isLoggedIn()): ?>Logged in<?php else: ?>Unlogged<?php endif */?></h1>
+	<div class="tracy-inner">
+
+		<?php /*if ($user->getIdentity()): echo Dumper::toHtml($user->getIdentity(), [Dumper::LIVE => TRUE]); else: ?><p>no identity</p><?php endif*/ ?>
+		<?php foreach($info as $item): ?>
+		<table width="100%">
+				<tr>
+					<th>Type</th>
+					<td><?= ucfirst($item->request["action"]) ?> SMS</td>
+				</tr>
+				<tr>
+					<th>Unicode</th>
+					<td class="<?= $item->request["data"]["unicode"] ? 'yes' : 'no' ?>"><?= $item->request["data"]["unicode"] ? 'Yes' : 'No' ?></td>
+				</tr>
+				<tr>
+					<th>Flash</th>
+					<td class="<?= $item->request["data"]["flash"] ? 'yes' : 'no' ?>"><?= $item->request["data"]["flash"] ? 'Yes' : 'No' ?></td>
+				</tr>
+				<tr>
+					<th>Sender</th>
+					<td><?php echo Dumper::toHtml($item->request["data"]["sender"], [Dumper::COLLAPSE => TRUE]); ?></td>
+				</tr>
+				<tr>
+					<th>SMS</th>
+					<td>
+						<table class="sms">
+							<tr>
+								<th>Number</th>
+								<th>Text</th>
+								<th>Country</th>
+							</tr>
+							<?php if($item->request["action"] === "transaction"): ?>
+							<tr>
+								<td><b><?= $item->request["data"]["message"]["phoneNumber"] ?></b></td>
+								<td><?= $item->request["data"]["message"]["text"] ?></td>
+								<td><?= $item->request["data"]["message"]["iso"] ? $item->request["data"]["message"]["iso"] : "-" ?></td>
+							</tr>
+							<?php elseif ($item->request["action"] === "bulk"): ?>
+								<?php foreach($item->request["data"]["message"] as $message): ?>
+									<tr>
+										<td><b><?= $message["phoneNumber"] ?></b></td>
+										<td><?= $message["text"] ?></td>
+										<td><?= $message["iso"] ? $message["iso"] : "-" ?></td>
+									</tr>
+								<?php endforeach; ?>
+							<?php endif; ?>
+						</table>
+					</td>
+				</tr>
+			<tr>
+				<th>Response</th>
+				<td><?php echo Dumper::toHtml($item->response, [Dumper::COLLAPSE => TRUE]); ?></td>
+			</tr>
+		</table>
+		<br>
+		<?php endforeach; ?>
+	</div>
+</div>
