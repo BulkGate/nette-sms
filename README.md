@@ -14,6 +14,4 @@ Nette SMS
     
     $this->sms_sender->send(new Nette\Sms\Message("420888555222", "test"));
 ```
-
-API HAS NOT WORKED YET
 ==============================
