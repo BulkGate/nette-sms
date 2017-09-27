@@ -9,8 +9,8 @@ namespace Nette\Sms;
 
 interface ISenderSettings
 {
-    /**
-     * @return array
-     */
-    public function toArray();
+	/**
+	 * @return array
+	 */
+	public function toArray();
 }

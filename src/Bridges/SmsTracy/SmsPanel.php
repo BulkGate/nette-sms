@@ -21,8 +21,9 @@ class SmsPanel implements Tracy\IBarPanel
 	/** @var Nette\Sms\Connection */
 	private $connection;
 
-    /** @var int */
+	/** @var int */
     private $count;
+
 
 	public function __construct(Nette\Sms\IConnection $connection)
 	{
@@ -41,19 +42,26 @@ class SmsPanel implements Tracy\IBarPanel
 		}
 
 		ob_start(function () {});
-        $info = $this->connection->getInfo();
-        $this->count = 0;
-        if(is_array($info) && count($info)) {
-            foreach($info as $i) {
-                if($i->request["action"] === "transaction") {
-                    $this->count++;
-                } else if($i->request["action"] === "bulk") {
-                    $this->count += count($i->request["data"]["message"]);
-                }
-            }
-        }
-        $count = $this->count;
+
+		$info = $this->connection->getInfo();
+
+		$this->count = 0;
+
+		if (is_array($info) && count($info)) {
+			foreach ($info as $i) {
+				if ($i->request['action'] === 'transaction') {
+					$this->count++;
+
+				} elseif ($i->request['action'] === 'bulk') {
+					$this->count += count($i->request['data']['message']);
+				}
+			}
+		}
+
+		$count = $this->count;
+
 		require __DIR__ . '/templates/SmsPanel.tab.phtml';
+
 		return ob_get_clean();
 	}
 
@@ -65,10 +73,13 @@ class SmsPanel implements Tracy\IBarPanel
 	public function getPanel()
 	{
 		ob_start(function () {});
-        $info = $this->connection->getInfo(TRUE);
-        $count = $this->count;
+
+		$info = $this->connection->getInfo(true);
+
+		$count = $this->count;
+
 		require __DIR__ . '/templates/SmsPanel.panel.phtml';
+
 		return ob_get_clean();
 	}
-
 }

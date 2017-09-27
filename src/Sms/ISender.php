@@ -9,32 +9,35 @@ namespace Nette\Sms;
 
 interface ISender
 {
-    const MESSAGE = "message";
-    const SENDER  = "sender";
-    const UNICODE = "unicode";
-    const FLASH   = "flash";
+	const MESSAGE = 'message';
 
-    /**
-     * @param bool $unicode
-     * @return ISender
-     */
-    public function unicode($unicode = TRUE);
+	const SENDER = 'sender';
 
-    /**
-     * @param bool $flash
-     * @return ISender
-     */
-    public function flash($flash = TRUE);
+	const UNICODE = 'unicode';
 
-    /**
-     * @param ISenderSettings $senderSettings
-     * @return ISender
-     */
-    public function setSenderSettings(ISenderSettings $senderSettings);
+	const FLASH = 'flash';
 
-    /**
-     * @param IMessage $message
-     * @param array $options
-     */
-    public function send(IMessage $message, array $options = []);
+	/**
+	 * @param bool $unicode
+	 * @return ISender
+	 */
+	public function unicode($unicode = true);
+
+	/**
+	 * @param bool $flash
+	 * @return ISender
+	 */
+	public function flash($flash = true);
+
+	/**
+	 * @param ISenderSettings $senderSettings
+	 * @return ISender
+	 */
+	public function setSenderSettings(ISenderSettings $senderSettings);
+
+	/**
+	 * @param IMessage $message
+	 * @param array $options
+	 */
+	public function send(IMessage $message, array $options = []);
 }

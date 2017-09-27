@@ -12,74 +12,77 @@ use Nette\Utils\Json;
 
 class Connection implements IConnection
 {
-    use Nette\SmartObject;
+	use Nette\SmartObject;
 
-    const HOST = "https://smsmidlet.com";
-    const API = "/bulkgate/nette.php";
+	const HOST = 'https://smsmidlet.com';
 
-    /** @var  string */
-    private $account;
+	const API = '/bulkgate/nette.php';
 
-    /** @var  string */
-    private $secretKey;
+	/** @var  string */
+	private $account;
 
-    /** @var array ServerResponse */
-    private $responses = [];
+	/** @var  string */
+	private $secretKey;
 
-    /**
-     * Connection constructor.
-     * @param $account
-     * @param $secretKey
-     */
-    public function __construct($account, $secretKey)
-    {
-        $this->account = $account;
-        $this->secretKey = $secretKey;
-    }
+	/** @var array ServerResponse */
+	private $responses = [];
 
-    /**
-     * @param $action
-     * @param array $data
-     * @param bool $compress
-     * @return ServerResponse
-     */
-    public function send($action, array $data, $compress = FALSE)
-    {
-        $context = stream_context_create(["http" => [
-            "method" => "POST",
-            "header" => "Content-type: application/json",
-            "content" => Json::encode($request = [
-                "action" => $action,
-                "account" => $this->account,
-                "secretKey" => $this->secretKey,
-                "compress" => $compress,
-                "data" => $compress ? Compress::compress($data) : $data
-            ])
-        ]]);
 
-        $fp = fopen(self::HOST . self::API, "r", false, $context);
+	/**
+	 * Connection constructor.
+	 * @param $account
+	 * @param $secretKey
+	 */
+	public function __construct($account, $secretKey)
+	{
+		$this->account = $account;
+		$this->secretKey = $secretKey;
+	}
 
-        if ($fp)
-        {
-            $result = stream_get_contents($fp);
-            fclose($fp);
 
-            $response = new ServerResponse(Json::decode($result, Json::FORCE_ARRAY));
-            $request["data"] = $data;
-            $this->responses[] = (object) ["request" => $request, "response" => $response];
-            return $response;
-        }
+	/**
+	 * @param $action
+	 * @param array $data
+	 * @param bool $compress
+	 * @return ServerResponse
+	 */
+	public function send($action, array $data, $compress = false)
+	{
+		$context = stream_context_create(['http' => [
+			'method' => 'POST',
+			'header' => 'Content-type: application/json',
+			'content' => Json::encode($request = [
+				'action' => $action,
+				'account' => $this->account,
+				'secretKey' => $this->secretKey,
+				'compress' => $compress,
+				'data' => $compress ? Compress::compress($data) : $data,
+			]),
+		]]);
 
-        throw new ConnectionException("SMS server is unavailable");
-    }
+		$fp = fopen(self::HOST . self::API, 'r', false, $context);
 
-    public function getInfo($delete = FALSE)
-    {
-        $responses = $this->responses;
+		if ($fp) {
+			$result = stream_get_contents($fp);
+			fclose($fp);
 
-        if($delete) {
-            $this->responses = [];
-        }
-        return $responses;
-    }
+			$response = new ServerResponse(Json::decode($result, Json::FORCE_ARRAY));
+			$request['data'] = $data;
+			$this->responses[] = (object) ['request' => $request, 'response' => $response];
+			return $response;
+		}
+
+		throw new ConnectionException('SMS server is unavailable');
+	}
+
+
+	public function getInfo($delete = false)
+	{
+		$responses = $this->responses;
+
+		if ($delete) {
+			$this->responses = [];
+		}
+		return $responses;
+	}
 }

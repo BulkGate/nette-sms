@@ -11,20 +11,29 @@ use Nette;
 
 class Gate
 {
-    use Nette\StaticClass;
+	use Nette\StaticClass;
 
-    const ISO    = "iso";
-    const GATE   = "gate";
-    const SENDER = "sender";
+	const ISO = 'iso';
 
-    const GATE_SYSTEM_NUMBER = "gSystem";
-    const GATE_SHORT_CODE    = "gShort";
-    const GATE_TEXT_SENDER   = "gText";
-    const GATE_OWN_NUMBER    = "gOwn";
+	const GATE = 'gate';
 
-    const GATE1 = 0;
-    const GATE2 = 1;
-    const GATE3 = 2;
-    const GATE4 = 3;
-    const GATE5 = 4;
+	const SENDER = 'sender';
+
+	const GATE_SYSTEM_NUMBER = 'gSystem';
+
+	const GATE_SHORT_CODE = 'gShort';
+
+	const GATE_TEXT_SENDER = 'gText';
+
+	const GATE_OWN_NUMBER = 'gOwn';
+
+	const GATE1 = 0;
+
+	const GATE2 = 1;
+
+	const GATE3 = 2;
+
+	const GATE4 = 3;
+
+	const GATE5 = 4;
 }

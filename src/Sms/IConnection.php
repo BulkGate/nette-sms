@@ -10,13 +10,13 @@ namespace Nette\Sms;
 
 interface IConnection
 {
-    /**
-     * @param $action
-     * @param array $data
-     * @param bool $compress
-     * @return ServerResponse
-     */
-    public function send($action, array $data, $compress = TRUE);
+	/**
+	 * @param $action
+	 * @param array $data
+	 * @param bool $compress
+	 * @return ServerResponse
+	 */
+	public function send($action, array $data, $compress = true);
 
-    public function getInfo();
+	public function getInfo();
 }

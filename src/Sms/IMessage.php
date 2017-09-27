@@ -9,22 +9,24 @@ namespace Nette\Sms;
 
 interface IMessage
 {
-    const PHONE_NUMBER = "phoneNumber";
-    const TEXT         = "text";
-    const ISO          = "iso";
+	const PHONE_NUMBER = 'phoneNumber';
 
-    /**
-     * @return string
-     */
-    public function __toString();
+	const TEXT = 'text';
 
-    /**
-     * @return array
-     */
-    public function toArray();
+	const ISO = 'iso';
 
-    /**
-     * @return string
-     */
-    public function getType();
+	/**
+	 * @return string
+	 */
+	public function __toString();
+
+	/**
+	 * @return array
+	 */
+	public function toArray();
+
+	/**
+	 * @return string
+	 */
+	public function getType();
 }

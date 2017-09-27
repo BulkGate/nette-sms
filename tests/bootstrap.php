@@ -4,8 +4,8 @@
 // invoked through the command: ../vendor/bin/tester .
 
 if (@!include __DIR__ . '/../../../../vendor/autoload.php') {
-    echo 'Install Nette Tester using `composer install`';
-    exit(1);
+	echo 'Install Nette Tester using `composer install`';
+	exit(1);
 }
 
 Tester\Environment::setup();
@@ -17,7 +17,8 @@ define('TEMP_DIR', __DIR__ . '/tmp/' . getmypid());
 Tester\Helpers::purge(TEMP_DIR);
 ini_set('session.save_path', TEMP_DIR);
 
+
 function test(\Closure $function)
 {
-    $function();
+	$function();
 }
