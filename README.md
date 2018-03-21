@@ -1,3 +1,5 @@
+**DEPRECATED** use https://github.com/BulkGate/sms
+
 Nette SMS
 ==============================
 
